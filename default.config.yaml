@@ -1,56 +1,129 @@
+# ==========================================
+#  修改时注意缩进 如果出现格式异常 可以用格式检查器
+# ==========================================
 Push:
-  # 推送方式
-  # 支持qmsg酱 server酱 企业微信推送 钉钉机器人推送
-  # Qmsg,Server,Epwc,Dingtalk,Wxhook
-  # 为空或False则不进行推送
-  PushMode: Qmsg
+  # 推送模式开关
+  # 可选值: Qmsg, Server, Epwc, Dingtalk, Wxhook
+  # 如果不需要推送，请保持为空或设置为 False
+  PushMode: ""
+
+  # Qmsg酱 (Qmsg)
   Qmsg:
     key: ""
+
+  # Server酱 (ServerChan)
   Server:
-    key: "your server key"
+    key: ""
+
+  # 企业微信应用推送 (Enterprise WeChat)
   Epwc:
     EnterpriseId: ""
     AppId: ""
     AppSecret: ""
     UserUid: ""
+
+  # 钉钉机器人 (Dingtalk)
   Dingtalk:
-    token:
-    secret:
-    atuser:
+    token: ""
+    secret: ""
+    atuser: ""
     atMobiles: 
     isAtAll: False
+
+  # 企业微信群机器人 (Wxhook)
   Wxhook:
     url: ""
 
+# ==========================================
+# 签到任务配置 (SignToken)
+# ==========================================
 SignToken:
+
+  # ----------------------------------------
+  # 好游快爆 (Hykb) - 已升级新版验证
+  # ----------------------------------------
+  # 获取方法：
+  # 1. 使用抓包工具(Reqable/Charles等)抓取 "huodong3.3839.com" 的POST请求 (如 ajax.php)
+  # 2. cookie: 在 Request Headers 中获取
+  # 3. scookie & device_id: 在 Request Body (Post Data) 中获取
+  # ----------------------------------------
   Hykb:
-    switch: False
-    cookie:
+    # 账号 1
+    - switch: False              # 开关：True/False
+      note: "账号1备注"           # 备注名，用于日志区分
+      cookie: ""                 # HTTP请求头中的 Cookie
+      scookie: ""                # POST数据中的 scookie (关键凭证, 代码会自动解码)
+      device_id: ""              # POST数据中的 device (设备ID, 通常以kb开头)
+      # 可选配置：自定义数美设备ID (需要自己抓，如果找不到 就导出抓包文件，然后把后缀改名为txt，直接搜索smdeviceid)
+      smdeviceid: ""
+
+    # 账号 2 (如需更多账号，复制上方区块即可)
+    # - switch: False
+    #   note: "账号2备注"
+    #   cookie: ""               # 可复用账号1的cookie
+    #   scookie: ""              # 必须填写该账号独立的 scookie
+    #   device_id: ""            # 必须填写该账号独立的 device
+
+  # ----------------------------------------
+  # MIUI 历史版本
+  # ----------------------------------------
   MiUI:
     switch: False
-    username:
-    password:
+    username: ""
+    password: ""
+
+  # ----------------------------------------
+  # 小黑盒 (XiaoHeiHe)
+  # ----------------------------------------
   XiaoHeiHe:
     switch: False
-    cookie:
-    imei:
-    heybox_id:
-    version:
+    cookie: ""
+    imei: ""
+    heybox_id: ""
+    version: ""
+
+  # ----------------------------------------
+  # 交易猫 (JiaoYiMao)
+  # ----------------------------------------
   JiaoYiMao:
     switch: False
-    cookie:
+    cookie: ""
+
+  # ----------------------------------------
+  # 天翼云盘 (Tyyp)
+  # ----------------------------------------
   Tyyp:
     switch: False
-    username:
-    password:
+    username: ""
+    password: ""
+
+  # ----------------------------------------
+  # 网易云游戏 (wyyyx)
+  # ----------------------------------------
   wyyyx:
     switch: False
-    cookie: 
-  # 请在阿里云盘网页端输入后面代码获取：JSON.parse(localStorage.getItem("token")).refresh_token
+    cookie: ""
+
+  # ----------------------------------------
+  # 阿里云盘 (Aliyundrive)
+  # ----------------------------------------
+  # 获取方法：在网页端控制台输入 JSON.parse(localStorage.getItem("token")).refresh_token
   Aliyundrive:
     switch: False
-    token: 
-  # 明日方舟配置 打开森空岛网页 登录账号, 打开https://web-api.skland.com/account/info/hg, 复制 content 的值
+    token: ""
+
+  # ----------------------------------------
+  # 明日方舟 (Arknights) - 森空岛
+  # ----------------------------------------
+  #  温馨提示 目前YJ用了加签算法.源代码已经不能用
+  # 访问 https://web-api.skland.com/account/info/hg 复制 content 字段的值
   Arknights:
     switch: False
-    token: 
+    token: ""
+  
+  # ----------------------------------------
+  # 雨云 (RainYun)
+  # ----------------------------------------
+  Raincloud:
+    switch: False
+    token: ""
